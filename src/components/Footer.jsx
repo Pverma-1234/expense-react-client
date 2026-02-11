@@ -1,10 +1,9 @@
-function Footer(){
+function Footer() {
     return (
-        <>
-        <div className="container">
-            <h2 className="text-center">This is Footer</h2>
+        <div className="container-fluid bg-light text-center py-3">
+            All rights reserved.
         </div>
-        </>
-    )
+    );
 }
+
 export default Footer;
