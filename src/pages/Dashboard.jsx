@@ -35,9 +35,9 @@ function Dashboard() {
                             </div>
                             <h5 className="card-title fw-bold">Payments</h5>
                             <p className="card-text text-muted small">Track and manage payment settlements</p>
-                            <button className="btn btn-success rounded-pill px-4 py-2 fw-bold" disabled>
-                                Coming Soon
-                            </button>
+                            <Link to="/manage-payments" className="btn btn-success rounded-pill px-4 py-2 fw-bold">
+                                Manage Payments
+                            </Link>
                         </div>
                     </div>
                 </div>

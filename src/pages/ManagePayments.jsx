@@ -27,6 +27,7 @@ function ManagePayments() {
         try {
             const response = await axios.post(
                 `${serverEndpoint}/profile/get-user-info`,
+                {},
                 { withCredentials: true }
             );
             setUserProfile(response.data.user);

@@ -17,13 +17,12 @@ function Login() {
     const [message, setMessage] = useState("");
 
     const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
+        const { name, value } = event.target;
 
-        setFormData({
-            ...formData,
+        setFormData((prevFormData) => ({
+            ...prevFormData,
             [name]: value,
-        });
+        }));
     };
 
     const validate = () => {
@@ -48,29 +47,46 @@ function Login() {
         // Prevent default behaviour of form which is to do complete page reload.
         event.preventDefault();
 
-        if (validate()) {
-            try {
-                const body = {
-                    email: formData.email,
-                    password: formData.password,
-                };
-                const config = { withCredentials: true };
-                const response = await axios.post(
-                    `${serverEndpoint}/auth/login`,
-                    body,
-                    config
-                );
-                // setUser(response.data.user);
-                dispatch({
-                    type: SET_USER,
-                    payload: response.data.user,
-                });
-            } catch (error) {
-                console.log(error);
-                setErrors({
-                    message: "Something went wrong, please try again",
-                });
-            }
+        const formValues = new FormData(event.currentTarget);
+        const email = String(formValues.get("email") || "").trim();
+        const password = String(formValues.get("password") || "");
+
+        const nextErrors = {};
+
+        if (!email) {
+            nextErrors.email = "Email is required";
+        }
+
+        if (!password) {
+            nextErrors.password = "Password is required";
+        }
+
+        setErrors(nextErrors);
+
+        if (Object.keys(nextErrors).length > 0) {
+            return;
+        }
+
+        try {
+            const body = {
+                email,
+                password,
+            };
+            const config = { withCredentials: true };
+            const response = await axios.post(
+                `${serverEndpoint}/auth/login`,
+                body,
+                config
+            );
+            dispatch({
+                type: SET_USER,
+                payload: response.data.user,
+            });
+        } catch (error) {
+            console.log(error);
+            setErrors({
+                message: "Something went wrong, please try again",
+            });
         }
     };
 
@@ -141,6 +157,7 @@ function Login() {
                                         }`}
                                         type="email"
                                         name="email"
+                                        value={formData.email}
                                         placeholder="name@example.com"
                                         onChange={handleChange}
                                     />
@@ -161,6 +178,7 @@ function Login() {
                                         }`}
                                         type="password"
                                         name="password"
+                                        value={formData.password}
                                         placeholder="Enter your password"
                                         onChange={handleChange}
                                     />
@@ -204,6 +222,12 @@ function Login() {
                                     />
                                 </GoogleOAuthProvider>
                             </div>
+                            <p className="text-center small text-muted mt-4 mb-0">
+    Don't have an account?{" "}
+    <Link to="/register" className="fw-bold text-primary">
+        Sign up
+    </Link>
+</p>
 
                         </div>
                     </div>
