@@ -16,7 +16,9 @@ import GroupExpenses from "./pages/GroupExpenses";
 import ManageUsers from "./pages/ManageUsers";
 import ProtectedRoute from "./rbac/ProtectedRoute";
 import UnauthorizedAccess from "./components/errors/UnauthorizedAccess";
-import ManagePayments from "./pages/ManagePayments"; 
+import ManagePayments from "./pages/ManagePayments";
+import Analytics from "./pages/Analytics";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
     const dispatch = useDispatch();
@@ -55,6 +57,7 @@ function App() {
     }
 
     return (
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <Routes>
 
             {/* Public Routes */}
@@ -164,6 +167,19 @@ function App() {
                 }
             />
 
+            <Route
+                path="/analytics"
+                element={
+                    userDetails ? (
+                        <UserLayout>
+                            <Analytics />
+                        </UserLayout>
+                    ) : (
+                        <Navigate to="/login" />
+                    )
+                }
+            />
+
             {/* Unauthorized Page */}
             <Route
                 path="/unauthorized-access"
@@ -179,6 +195,7 @@ function App() {
             />
 
         </Routes>
+        </GoogleOAuthProvider>
     );
 }
 

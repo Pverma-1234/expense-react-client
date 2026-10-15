@@ -50,9 +50,9 @@ function Dashboard() {
                             </div>
                             <h5 className="card-title fw-bold">Analytics</h5>
                             <p className="card-text text-muted small">View expense reports and analytics</p>
-                            <button className="btn btn-info rounded-pill px-4 py-2 fw-bold" disabled>
-                                Coming Soon
-                            </button>
+                            <Link to="/analytics" className="btn btn-info rounded-pill px-4 py-2 fw-bold">
+                                View Analytics
+                            </Link>
                         </div>
                     </div>
                 </div>

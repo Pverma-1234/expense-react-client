@@ -1,9 +1,209 @@
+// // import axios from "axios";
+// // import { serverEndpoint } from "../config/appConfig";
+// // import { useEffect, useState } from "react";
+// // import GroupCard from "../components/GroupCard";
+// // import CreateGroupModal from "../components/CreateGroupModal";
+// // import { usePermission } from "../rbac/userPermissions"
+
+// // function Groups() {
+// //     const [groups, setGroups] = useState([]);
+// //     const [loading, setLoading] = useState(true);
+// //     const [show, setShow] = useState(false);
+// //     const permissions = usePermission();
+
+// //     const [currentPage, setCurrentPage] = useState(1);
+// //     const [totalPages, setTotalPages] = useState(1);
+// //     const [limit] = useState(3);
+// //     const [sortBy,setSortBy] = useState('newest');
+// //     const fetchGroups = async (page=1) => {
+// //         try {
+// //             const response = await axios.get(
+// //                 `${serverEndpoint}/groups/my-groups?page=${page}&limit=${limit}&sortBy=${sortBy}`,
+// //                 { withCredentials: true }
+// //             );
+// //             setGroups(response?.data?.groups);
+// //             setTotalPages(response?.data?.pagination?.totalPages);
+// //             setCurrentPage(response?.data?.pagination?.currentPage);
+// //         } catch (error) {
+// //             console.log(error);
+// //         } finally {
+// //             setLoading(false);
+// //         }
+// //     };
+
+// //     const handleGroupUpdateSuccess = (data) => {
+// //         // Default to 1st page whenever there is an update to the group,
+// //         // or new group is added. This logic can be customized as per the
+// //         // user experience you want to provide. you can choose to keep the user
+// //         // on the same page or go to last page. No right or wrong here, just a design choice.
+// //         fetchGroups(1);
+// //     };
+// //     // Triggers call to fetchGroups when the component is rendered for the very
+// //     // first time and also whenever value of the currentPage state variable changes.
+
+// //     useEffect(() => {
+// //         fetchGroups(currentPage);
+// //     }, [currentPage, sortBy]);
+
+// //     const handlePageChange = (newPage) => {
+// //         if (newPage >= 1 && newPage <= totalPages) {
+// //             setCurrentPage(newPage);
+// //         }
+// //     }
+
+// //     if (loading) {
+// //         return (
+// //             <div
+// //                 className="container p-5 d-flex flex-column align-items-center justify-content-center"
+// //                 style={{ minHeight: "60vh" }}
+// //             >
+// //                 <div
+// //                     className="spinner-grow text-primary"
+// //                     role="status"
+// //                     style={{ width: "3rem", height: "3rem" }}
+// //                 >
+// //                     <span className="visually-hidden">Loading...</span>
+// //                 </div>
+// //                 <p className="mt-3 text-muted fw-medium">
+// //                     Syncing your circles...
+// //                 </p>
+// //             </div>
+// //         );
+// //     }
+
+// //     return (
+// //         <div className="container py-5 px-4 px-md-5">
+// //             <div className="row align-items-center mb-5">
+// //                 <div className="col-md-8 text-center text-md-start mb-3 mb-md-0">
+// //                     <h2 className="fw-bold text-dark display-6">
+// //                         Manage <span className="text-primary">Groups</span>
+// //                     </h2>
+// //                     <p className="text-muted mb-0">
+// //                         View balances, invite friends, and settle shared
+// //                         expenses in one click.
+// //                     </p>
+// //                 </div>
+// //                 {permissions.canCreateGroups && (
+// //                     <div className="col-md-4 text-center text-md-end">
+// //                         <div className="d-flex align-items-center w-sm-auto">
+// //                             <label>Sort:</label>
+
+// //                             <select className="form-select form-select-sm rounded-pill me-2"
+// //                                 value={sortBy}
+// //                                 onChange={(e) => {
+// //                                     setSortBy(e.target.value);
+// //                                     setCurrentPage(1); // Reset to first page when sort order changes
+// //                                 }}
+// //                             >
+// //                                 <option value="newest">Newest First</option>
+// //                                 <option value="oldest">Oldest First</option>
+// //                             </select>
+// //                         <button 
+// //                             className="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm"
+// //                             onClick={() => setShow(true)}
+// //                         >
+// //                             <i className="bi bi-plus-lg me-2"></i>
+// //                             New Group
+// //                         </button>
+// //                     </div>
+
+            
+
+                        
+// //                 )}
+// //             </div>
+
+// //             <hr className="mb-5 opacity-10" />
+
+// //             {groups.length === 0 && (
+// //                 <div className="text-center py-5 bg-light rounded-5 border border-dashed border-primary border-opacity-25 shadow-inner">
+// //                     <div className="bg-white rounded-circle d-inline-flex p-4 mb-4 shadow-sm">
+// //                         <i
+// //                             className="bi bi-people text-primary"
+// //                             style={{ fontSize: "3rem" }}
+// //                         ></i>
+// //                     </div>
+// //                     <h4 className="fw-bold">No Groups Found</h4>
+// //                     <p
+// //                         className="text-muted mx-auto mb-4"
+// //                         style={{ maxWidth: "400px" }}
+// //                     >
+// //                         You haven't joined any groups yet. Create a group to
+// //                         start splitting bills with your friends or roommates!
+// //                     </p>
+// //                     <button
+// //                         className="btn btn-outline-primary rounded-pill px-4"
+// //                         onClick={() => setShow(true)}
+// //                     >
+// //                         Get Started
+// //                     </button>
+// //                 </div>
+// //             )}
+
+// //             {groups.length > 0 && (
+// //                 <div className="row g-4 animate__animated animate__fadeIn">
+// //                     {groups.map((group) => (
+// //                         <div className="col-md-6 col-lg-4" key={group._id}>
+// //                             <GroupCard
+// //                                 group={group}
+// //                                 onUpdate={handleGroupUpdateSuccess}
+// //                             />
+// //                         </div>
+// //                     ))}
+// //                 </div>
+// //             )}
+
+// //             {totalPages > 1 && (
+// //                 <nav className="mt-5 d-flex justify-content-center" >
+// //                     <ul className="pagination shadow-sm">
+// //                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+// //                             <button className="page-link" 
+// //                                 onClick={() => handlePageChange(currentPage - 1)}>
+                                
+// //                                 &laquo;
+// //                             </button>
+// //                         </li>
+                        
+// //                         {/* ...Array(totalPages) generates an array of size totalPage with empty (undefined) value */}
+// //                         {[...Array(totalPages)].map((num,index) => (
+// //                             <li key={index+1} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+// //                                 <button className="page-link" 
+// //                                     onClick={() => handlePageChange(index + 1)}>
+// //                                     {index + 1}
+// //                                 </button>
+// //                             </li>
+// //                         ))}
+
+// //                         {/* Next page button link */}
+// //                         <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+// //                             <button className="page-link" 
+// //                                 onClick={() => handlePageChange(currentPage + 1)}>
+                                
+// //                                 &raquo;
+// //                             </button>
+// //                         </li>
+// //                     </ul>
+// //                 </nav>
+// //             )}
+
+// //             <CreateGroupModal
+// //                 show={show}
+// //                 onHide={() => setShow(false)}
+// //                 onSuccess={handleGroupUpdateSuccess}
+// //             />
+// //         </div>
+// //     );
+// // }
+
+// // export default Groups;
+
+
 // import axios from "axios";
 // import { serverEndpoint } from "../config/appConfig";
 // import { useEffect, useState } from "react";
 // import GroupCard from "../components/GroupCard";
 // import CreateGroupModal from "../components/CreateGroupModal";
-// import { usePermission } from "../rbac/userPermissions"
+// import { usePermission } from "../rbac/userPermissions";
 
 // function Groups() {
 //     const [groups, setGroups] = useState([]);
@@ -14,16 +214,18 @@
 //     const [currentPage, setCurrentPage] = useState(1);
 //     const [totalPages, setTotalPages] = useState(1);
 //     const [limit] = useState(3);
-//     const [sortBy,setSortBy] = useState('newest');
-//     const fetchGroups = async (page=1) => {
+//     const [sortBy, setSortBy] = useState("newest");
+
+//     const fetchGroups = async (page = 1) => {
 //         try {
 //             const response = await axios.get(
 //                 `${serverEndpoint}/groups/my-groups?page=${page}&limit=${limit}&sortBy=${sortBy}`,
 //                 { withCredentials: true }
 //             );
-//             setGroups(response?.data?.groups);
-//             setTotalPages(response?.data?.pagination?.totalPages);
-//             setCurrentPage(response?.data?.pagination?.currentPage);
+
+//             setGroups(response?.data?.groups || []);
+//             setTotalPages(response?.data?.pagination?.totalPages || 1);
+//             setCurrentPage(response?.data?.pagination?.currentPage || 1);
 //         } catch (error) {
 //             console.log(error);
 //         } finally {
@@ -31,15 +233,9 @@
 //         }
 //     };
 
-//     const handleGroupUpdateSuccess = (data) => {
-//         // Default to 1st page whenever there is an update to the group,
-//         // or new group is added. This logic can be customized as per the
-//         // user experience you want to provide. you can choose to keep the user
-//         // on the same page or go to last page. No right or wrong here, just a design choice.
+//     const handleGroupUpdateSuccess = () => {
 //         fetchGroups(1);
 //     };
-//     // Triggers call to fetchGroups when the component is rendered for the very
-//     // first time and also whenever value of the currentPage state variable changes.
 
 //     useEffect(() => {
 //         fetchGroups(currentPage);
@@ -49,7 +245,7 @@
 //         if (newPage >= 1 && newPage <= totalPages) {
 //             setCurrentPage(newPage);
 //         }
-//     }
+//     };
 
 //     if (loading) {
 //         return (
@@ -83,22 +279,25 @@
 //                         expenses in one click.
 //                     </p>
 //                 </div>
-//                 {permissions.canCreateGroups && (
-//                     <div className="col-md-4 text-center text-md-end">
-//                         <div className="d-flex align-items-center w-sm-auto">
-//                             <label>Sort:</label>
 
-//                             <select className="form-select form-select-sm rounded-pill me-2"
-//                                 value={sortBy}
-//                                 onChange={(e) => {
-//                                     setSortBy(e.target.value);
-//                                     setCurrentPage(1); // Reset to first page when sort order changes
-//                                 }}
-//                             >
-//                                 <option value="newest">Newest First</option>
-//                                 <option value="oldest">Oldest First</option>
-//                             </select>
-//                         <button 
+//                 <div className="col-md-4 text-center text-md-end">
+//                     <div className="d-flex align-items-center justify-content-md-end gap-2">
+//                         <label className="me-1">Sort:</label>
+
+//                         <select
+//                             className="form-select form-select-sm rounded-pill"
+//                             value={sortBy}
+//                             onChange={(e) => {
+//                                 setSortBy(e.target.value);
+//                                 setCurrentPage(1);
+//                             }}
+//                             style={{ maxWidth: "150px" }}
+//                         >
+//                             <option value="newest">Newest First</option>
+//                             <option value="oldest">Oldest First</option>
+//                         </select>
+
+//                         <button
 //                             className="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm"
 //                             onClick={() => setShow(true)}
 //                         >
@@ -106,11 +305,7 @@
 //                             New Group
 //                         </button>
 //                     </div>
-
-            
-
-                        
-//                 )}
+//                 </div>
 //             </div>
 
 //             <hr className="mb-5 opacity-10" />
@@ -154,31 +349,36 @@
 //             )}
 
 //             {totalPages > 1 && (
-//                 <nav className="mt-5 d-flex justify-content-center" >
+//                 <nav className="mt-5 d-flex justify-content-center">
 //                     <ul className="pagination shadow-sm">
-//                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-//                             <button className="page-link" 
-//                                 onClick={() => handlePageChange(currentPage - 1)}>
-                                
+//                         <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+//                             <button
+//                                 className="page-link"
+//                                 onClick={() => handlePageChange(currentPage - 1)}
+//                             >
 //                                 &laquo;
 //                             </button>
 //                         </li>
-                        
-//                         {/* ...Array(totalPages) generates an array of size totalPage with empty (undefined) value */}
-//                         {[...Array(totalPages)].map((num,index) => (
-//                             <li key={index+1} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-//                                 <button className="page-link" 
-//                                     onClick={() => handlePageChange(index + 1)}>
+
+//                         {[...Array(totalPages)].map((_, index) => (
+//                             <li
+//                                 key={index + 1}
+//                                 className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
+//                             >
+//                                 <button
+//                                     className="page-link"
+//                                     onClick={() => handlePageChange(index + 1)}
+//                                 >
 //                                     {index + 1}
 //                                 </button>
 //                             </li>
 //                         ))}
 
-//                         {/* Next page button link */}
-//                         <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-//                             <button className="page-link" 
-//                                 onClick={() => handlePageChange(currentPage + 1)}>
-                                
+//                         <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+//                             <button
+//                                 className="page-link"
+//                                 onClick={() => handlePageChange(currentPage + 1)}
+//                             >
 //                                 &raquo;
 //                             </button>
 //                         </li>
@@ -197,55 +397,147 @@
 
 // export default Groups;
 
-
 import axios from "axios";
 import { serverEndpoint } from "../config/appConfig";
 import { useEffect, useState } from "react";
 import GroupCard from "../components/GroupCard";
 import CreateGroupModal from "../components/CreateGroupModal";
-import { usePermission } from "../rbac/userPermissions";
 
 function Groups() {
     const [groups, setGroups] = useState([]);
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
-    const permissions = usePermission();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [limit] = useState(3);
     const [sortBy, setSortBy] = useState("newest");
 
+    // =========================================================
+    // FETCH GROUPS
+    // =========================================================
+
     const fetchGroups = async (page = 1) => {
         try {
             const response = await axios.get(
                 `${serverEndpoint}/groups/my-groups?page=${page}&limit=${limit}&sortBy=${sortBy}`,
-                { withCredentials: true }
+                {
+                    withCredentials: true,
+                }
             );
 
             setGroups(response?.data?.groups || []);
-            setTotalPages(response?.data?.pagination?.totalPages || 1);
-            setCurrentPage(response?.data?.pagination?.currentPage || 1);
+            setTotalPages(
+                Math.max(
+                    response?.data?.pagination?.totalPages || 1,
+                    1
+                )
+            );
+
+            setCurrentPage(
+                response?.data?.pagination?.currentPage || page
+            );
         } catch (error) {
-            console.log(error);
+            console.error("Unable to fetch groups:", error);
         } finally {
             setLoading(false);
         }
     };
 
+    // =========================================================
+    // GROUP UPDATED / MEMBER ADDED
+    // =========================================================
+
     const handleGroupUpdateSuccess = () => {
-        fetchGroups(1);
+        fetchGroups(currentPage);
     };
+
+    // =========================================================
+    // GROUP DELETED
+    // =========================================================
+
+    const handleGroupDeleted = async (deletedGroupId) => {
+        /*
+         * Remove immediately from UI.
+         */
+        const remainingGroups = groups.filter(
+            (group) => group._id !== deletedGroupId
+        );
+
+        setGroups(remainingGroups);
+
+        /*
+         * If this was the last group on the current page
+         * and we're not on page 1, move to previous page.
+         */
+        if (
+            remainingGroups.length === 0 &&
+            currentPage > 1
+        ) {
+            setCurrentPage(currentPage - 1);
+            return;
+        }
+
+        /*
+         * Otherwise reload current page so pagination
+         * and totalPages remain correct.
+         */
+        await fetchGroups(currentPage);
+    };
+
+    // =========================================================
+    // CALLBACK USED BY GROUP CARD
+    // =========================================================
+
+    const handleGroupCardUpdate = (
+        updatedGroup,
+        deletedGroupId
+    ) => {
+        if (deletedGroupId) {
+            handleGroupDeleted(deletedGroupId);
+            return;
+        }
+
+        // Member added / normal group update
+        if (updatedGroup) {
+            setGroups((currentGroups) =>
+                currentGroups.map((group) =>
+                    group._id === updatedGroup._id
+                        ? updatedGroup
+                        : group
+                )
+            );
+
+            return;
+        }
+
+        fetchGroups(currentPage);
+    };
+
+    // =========================================================
+    // FETCH WHEN PAGE OR SORT CHANGES
+    // =========================================================
 
     useEffect(() => {
         fetchGroups(currentPage);
     }, [currentPage, sortBy]);
 
+    // =========================================================
+    // PAGINATION
+    // =========================================================
+
     const handlePageChange = (newPage) => {
-        if (newPage >= 1 && newPage <= totalPages) {
+        if (
+            newPage >= 1 &&
+            newPage <= totalPages
+        ) {
             setCurrentPage(newPage);
         }
     };
+
+    // =========================================================
+    // LOADING
+    // =========================================================
 
     if (loading) {
         return (
@@ -256,10 +548,16 @@ function Groups() {
                 <div
                     className="spinner-grow text-primary"
                     role="status"
-                    style={{ width: "3rem", height: "3rem" }}
+                    style={{
+                        width: "3rem",
+                        height: "3rem",
+                    }}
                 >
-                    <span className="visually-hidden">Loading...</span>
+                    <span className="visually-hidden">
+                        Loading...
+                    </span>
                 </div>
+
                 <p className="mt-3 text-muted fw-medium">
                     Syncing your circles...
                 </p>
@@ -269,20 +567,36 @@ function Groups() {
 
     return (
         <div className="container py-5 px-4 px-md-5">
+
+            {/* =========================================
+                HEADER
+            ========================================== */}
+
             <div className="row align-items-center mb-5">
+
                 <div className="col-md-8 text-center text-md-start mb-3 mb-md-0">
+
                     <h2 className="fw-bold text-dark display-6">
-                        Manage <span className="text-primary">Groups</span>
+                        Manage{" "}
+                        <span className="text-primary">
+                            Groups
+                        </span>
                     </h2>
+
                     <p className="text-muted mb-0">
-                        View balances, invite friends, and settle shared
-                        expenses in one click.
+                        View balances, invite friends,
+                        and settle shared expenses in one click.
                     </p>
+
                 </div>
 
                 <div className="col-md-4 text-center text-md-end">
+
                     <div className="d-flex align-items-center justify-content-md-end gap-2">
-                        <label className="me-1">Sort:</label>
+
+                        <label className="me-1">
+                            Sort:
+                        </label>
 
                         <select
                             className="form-select form-select-sm rounded-pill"
@@ -291,106 +605,224 @@ function Groups() {
                                 setSortBy(e.target.value);
                                 setCurrentPage(1);
                             }}
-                            style={{ maxWidth: "150px" }}
+                            style={{
+                                maxWidth: "150px",
+                            }}
                         >
-                            <option value="newest">Newest First</option>
-                            <option value="oldest">Oldest First</option>
+                            <option value="newest">
+                                Newest First
+                            </option>
+
+                            <option value="oldest">
+                                Oldest First
+                            </option>
                         </select>
 
                         <button
+                            type="button"
                             className="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm"
                             onClick={() => setShow(true)}
                         >
                             <i className="bi bi-plus-lg me-2"></i>
                             New Group
                         </button>
+
                     </div>
                 </div>
+
             </div>
 
             <hr className="mb-5 opacity-10" />
 
+            {/* =========================================
+                NO GROUPS
+            ========================================== */}
+
             {groups.length === 0 && (
-                <div className="text-center py-5 bg-light rounded-5 border border-dashed border-primary border-opacity-25 shadow-inner">
+
+                <div className="text-center py-5 bg-light rounded-5 border border-primary border-opacity-25">
+
                     <div className="bg-white rounded-circle d-inline-flex p-4 mb-4 shadow-sm">
+
                         <i
                             className="bi bi-people text-primary"
-                            style={{ fontSize: "3rem" }}
+                            style={{
+                                fontSize: "3rem",
+                            }}
                         ></i>
+
                     </div>
-                    <h4 className="fw-bold">No Groups Found</h4>
+
+                    <h4 className="fw-bold">
+                        No Groups Found
+                    </h4>
+
                     <p
                         className="text-muted mx-auto mb-4"
-                        style={{ maxWidth: "400px" }}
+                        style={{
+                            maxWidth: "400px",
+                        }}
                     >
-                        You haven't joined any groups yet. Create a group to
-                        start splitting bills with your friends or roommates!
+                        You haven't joined any groups yet.
+                        Create a group to start splitting
+                        bills with your friends or roommates!
                     </p>
+
                     <button
+                        type="button"
                         className="btn btn-outline-primary rounded-pill px-4"
                         onClick={() => setShow(true)}
                     >
                         Get Started
                     </button>
+
                 </div>
+
             )}
+
+            {/* =========================================
+                GROUP CARDS
+            ========================================== */}
 
             {groups.length > 0 && (
-                <div className="row g-4 animate__animated animate__fadeIn">
+
+                <div className="row g-4">
+
                     {groups.map((group) => (
-                        <div className="col-md-6 col-lg-4" key={group._id}>
+
+                        <div
+                            className="col-md-6 col-lg-4"
+                            key={group._id}
+                        >
+
                             <GroupCard
                                 group={group}
-                                onUpdate={handleGroupUpdateSuccess}
+                                onUpdate={handleGroupCardUpdate}
                             />
+
                         </div>
+
                     ))}
+
                 </div>
+
             )}
 
+            {/* =========================================
+                PAGINATION
+            ========================================== */}
+
             {totalPages > 1 && (
+
                 <nav className="mt-5 d-flex justify-content-center">
+
                     <ul className="pagination shadow-sm">
-                        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+
+                        {/* Previous */}
+
+                        <li
+                            className={`page-item ${
+                                currentPage === 1
+                                    ? "disabled"
+                                    : ""
+                            }`}
+                        >
                             <button
+                                type="button"
                                 className="page-link"
-                                onClick={() => handlePageChange(currentPage - 1)}
+                                onClick={() =>
+                                    handlePageChange(
+                                        currentPage - 1
+                                    )
+                                }
                             >
                                 &laquo;
                             </button>
                         </li>
 
-                        {[...Array(totalPages)].map((_, index) => (
-                            <li
-                                key={index + 1}
-                                className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
-                            >
-                                <button
-                                    className="page-link"
-                                    onClick={() => handlePageChange(index + 1)}
-                                >
-                                    {index + 1}
-                                </button>
-                            </li>
-                        ))}
+                        {/* Page numbers */}
 
-                        <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                        {[...Array(totalPages)].map(
+                            (_, index) => {
+
+                                const pageNumber =
+                                    index + 1;
+
+                                return (
+
+                                    <li
+                                        key={pageNumber}
+                                        className={`page-item ${
+                                            currentPage === pageNumber
+                                                ? "active"
+                                                : ""
+                                        }`}
+                                    >
+
+                                        <button
+                                            type="button"
+                                            className="page-link"
+                                            onClick={() =>
+                                                handlePageChange(
+                                                    pageNumber
+                                                )
+                                            }
+                                        >
+                                            {pageNumber}
+                                        </button>
+
+                                    </li>
+
+                                );
+                            }
+                        )}
+
+                        {/* Next */}
+
+                        <li
+                            className={`page-item ${
+                                currentPage === totalPages
+                                    ? "disabled"
+                                    : ""
+                            }`}
+                        >
                             <button
+                                type="button"
                                 className="page-link"
-                                onClick={() => handlePageChange(currentPage + 1)}
+                                onClick={() =>
+                                    handlePageChange(
+                                        currentPage + 1
+                                    )
+                                }
                             >
                                 &raquo;
                             </button>
                         </li>
+
                     </ul>
+
                 </nav>
+
             )}
+
+            {/* =========================================
+                CREATE GROUP MODAL
+            ========================================== */}
 
             <CreateGroupModal
                 show={show}
                 onHide={() => setShow(false)}
-                onSuccess={handleGroupUpdateSuccess}
+                onSuccess={() => {
+                    setShow(false);
+
+                    if (currentPage !== 1) {
+                        setCurrentPage(1);
+                    } else {
+                        fetchGroups(1);
+                    }
+                }}
             />
+
         </div>
     );
 }

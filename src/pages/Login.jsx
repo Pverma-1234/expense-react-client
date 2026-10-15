@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import { serverEndpoint } from "../config/appConfig";
 import { useDispatch } from "react-redux";
 import { SET_USER } from "../redux/user/action";
@@ -207,20 +207,14 @@ function Login() {
 
                             {/* Google Social Login */}
                             <div className="d-flex justify-content-center w-100">
-                                <GoogleOAuthProvider
-                                    clientId={
-                                        import.meta.env.VITE_GOOGLE_CLIENT_ID
-                                    }
-                                >
-                                    <GoogleLogin
-                                        onSuccess={handleGoogleSuccess}
-                                        onError={handleGoogleFailure}
-                                        theme="outline"
-                                        shape="pill"
-                                        text="signin_with"
-                                        width="500"
-                                    />
-                                </GoogleOAuthProvider>
+                                <GoogleLogin
+                                    onSuccess={handleGoogleSuccess}
+                                    onError={handleGoogleFailure}
+                                    theme="outline"
+                                    shape="pill"
+                                    text="signin_with"
+                                    width="500"
+                                />
                             </div>
                             <p className="text-center small text-muted mt-4 mb-0">
     Don't have an account?{" "}
